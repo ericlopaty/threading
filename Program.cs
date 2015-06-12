@@ -13,7 +13,7 @@ namespace threading
 		static void Main(string[] args)
 		{
 			int n = -1;
-				while (n != 0)
+			while (n != 0)
 			{
 				Console.Clear();
 				Console.Write("1 Manual Thread\n2 Thread Wrapper\n3 Thread Pool\n>");
@@ -26,21 +26,12 @@ namespace threading
 					n = 0;
 				}
 				Console.Clear();
-				switch (n)
-				{
-					case 1:
-						ManualThread mt = new ManualThread();
-						mt.StartWorkers();
-						break;
-					case 2:
-						ThreadWrapper tw = new ThreadWrapper();
-						tw.StartWorkers();
-						break;
-					case 3:
-						PoolThread pt = new PoolThread();
-						pt.StartWorkers();
-						break;
-				}
+				if (n == 1)
+					new ManualThread().StartWorkers();
+				else if (n == 2)
+					new ThreadWrapper().StartWorkers();
+				else if (n == 3)
+					new PoolThread().StartWorkers();
 				Console.SetCursorPosition(0, Console.WindowHeight - 1);
 				Console.Write("Press ENTER to continue.");
 				Console.ReadLine();

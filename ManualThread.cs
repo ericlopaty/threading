@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace threading
 {
-	// create two threads manually. main is blocked until both threads complete.
+	// create a few threads manually. main is blocked until both threads complete.
 	class ManualThread
 	{
 		static Random rand = new Random(DateTime.Now.Millisecond);
@@ -21,10 +21,23 @@ namespace threading
 			Thread t2 = new Thread(new ThreadStart(MyThread2));
 			t2.Priority = ThreadPriority.Lowest;
 			t2.Start();
-
-			//block until threads complete
+			
 			t1.Join();
 			t2.Join();
+		}
+
+		static void ThreadWorker()
+		{
+			try
+			{
+				DumpLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0);
+			}
+			catch (System.Threading.ThreadInterruptedException)
+			{
+			}
+			finally
+			{
+			}
 		}
 
 		static void MyThread1()
